@@ -1,3 +1,4 @@
+import CreateNoteDialog from '@/components/create-note-dialog'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { UserButton } from '@clerk/nextjs'
@@ -38,6 +39,9 @@ const DashboardPage = (props: Props) => {
 						<h2 className="text-xl text-gray-500">
 							All empty in here...
 						</h2>
+					</div>
+					<div className="grid sm:grid-cols-3 md:grid-cols-5 grid-cols-1 gap-3">
+						<CreateNoteDialog />
 					</div>
 				</div>
 			</div>

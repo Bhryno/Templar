@@ -1,4 +1,5 @@
-import { generateImagePrompt } from '@/lib/openai'
+import { db } from '@/lib/db'
+import { $notes } from '@/lib/db/schema'
 import { auth } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 
@@ -11,8 +12,14 @@ export async function POST(req: Request) {
 
 	const body = await req.json()
 	const { name } = body
-	const image_desc = await generateImagePrompt(name)
+	const note_ids = await db.insert($notes).values({
+		name,
+		userId
+	}).returning({
+		insertedId: $notes.id
+	})
 
-	console.log({ image_desc })
-	return new NextResponse('ok')
+	return NextResponse.json({
+		note_id: note_ids[0].insertedId
+	})
 }

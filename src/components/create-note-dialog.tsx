@@ -24,7 +24,9 @@ const CreateNoteDialog = (props: Props) => {
 			window.alert('Note name cannot be an empty string.')
 		}
 		createNote.mutate(undefined, {
-			onSuccess: () => console.log('Note created'),
+			onSuccess: ({ note_id }) =>  {
+				console.log('Created new note: ', {note_id})
+			},
 			onError: error => console.log(error)
 		})
 	}

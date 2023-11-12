@@ -3,6 +3,7 @@ import {
 	Bold,
 	Code,
 	Codepen,
+	Download,
 	FlipHorizontal,
 	FlipVertical,
 	Heading1,
@@ -22,6 +23,8 @@ import {
 	TableIcon,
 	Undo
 } from 'lucide-react'
+
+import downloadPDF from '@/lib/pdf-download'
 
 type Props = {
 	editor: Editor
@@ -199,6 +202,9 @@ const TipTapMenubar = ({ editor }: Props) => {
 				}
 			>
 				<SeparatorHorizontal className="w-6 h-6" />
+			</button>
+			<button onClick={() => downloadPDF(editor.getHTML(), 'download')}>
+				<Download className="w-6 h-6" />
 			</button>
 		</div>
 	)

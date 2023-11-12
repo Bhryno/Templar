@@ -22,7 +22,8 @@ import {
 	TableIcon,
 	Undo
 } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+
+import downloadPDF from '@/lib/pdf-download'
 
 type Props = {
 	editor: Editor

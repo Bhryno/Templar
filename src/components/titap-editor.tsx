@@ -1,9 +1,10 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { EditorContent, useEditor } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
 import TipTapMenubar from './tiptap-menubar'
 import { Button } from './ui/button'
+import { useDebounce } from '@/lib/useDebounce'
 
 type Props = {}
 
@@ -17,6 +18,11 @@ const TipTapEditor = (props: Props) => {
 			setEditorState(editor.getHTML())
 		}
 	})
+	const debounceEditorState = useDebounce(editorState, 500)
+
+	useEffect(() => {
+		console.log(debounceEditorState)
+	}, [debounceEditorState])
 
 	return (
 		<>

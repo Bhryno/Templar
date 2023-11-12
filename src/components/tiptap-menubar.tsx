@@ -23,21 +23,11 @@ import {
 	Undo
 } from 'lucide-react'
 
-import downloadPDF from '@/lib/pdf-download'
-
 type Props = {
 	editor: Editor
 }
 
 const TipTapMenubar = ({ editor }: Props) => {
-	const [isEditable, setIsEditable] = useState(true)
-
-	useEffect(() => {
-		if (editor) {
-			editor.setEditable(isEditable)
-		}
-	}, [isEditable, editor])
-
 	return (
 		<div className="flex flex-wrap gap-2">
 			<button

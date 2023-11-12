@@ -42,7 +42,7 @@ const TipTapEditor = ({ note }: Props) => {
 		if (debounceEditorState === '') return
 		saveNote.mutate(undefined, {
 			onSuccess: data => console.log('Successful update', data),
-			onError: error => console.error(error)
+			onError: err => console.error(err)
 		})
 	}, [debounceEditorState])
 

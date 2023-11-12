@@ -55,7 +55,7 @@ const DashboardPage = async (props: Props) => {
 						<CreateNoteDialog />
 						{notes.map(note => {
 							return (
-								<a href={`/notes/${note.id}`} key={note.id}>
+								<a href={`/note/${note.id}`} key={note.id}>
 									<div className="border border-stone-200 rounded-lg overflow-hidden flex flex-col hover:shadow-xl transition hover:-translate-y-1">
 										<div className="p-4">
 											<h3 className="text-xl font-semibold text-gray-900">

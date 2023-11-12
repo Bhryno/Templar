@@ -8,10 +8,11 @@ import {
 	DialogTitle,
 	DialogTrigger
 } from './ui/dialog'
-import { Plus } from 'lucide-react'
+import { Loader2, Plus } from 'lucide-react'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 
 type Props = {}
 
@@ -24,10 +25,13 @@ const CreateNoteDialog = (props: Props) => {
 			window.alert('Note name cannot be an empty string.')
 		}
 		createNote.mutate(undefined, {
-			onSuccess: ({ note_id }) =>  {
-				console.log('Created new note: ', {note_id})
+			onSuccess: ({ note_id }) => {
+				router.push(`/note/${note_id}`)
 			},
-			onError: error => console.log(error)
+			onError: error => {
+				console.error(error)
+				window.alert('Failed to create new note.')
+			}
 		})
 	}
 	const createNote = useMutation({
@@ -39,6 +43,7 @@ const CreateNoteDialog = (props: Props) => {
 			return response.data
 		}
 	})
+	const router = useRouter()
 
 	return (
 		<Dialog>
@@ -68,7 +73,14 @@ const CreateNoteDialog = (props: Props) => {
 						<Button type="reset" variant={'secondary'}>
 							Cancel
 						</Button>
-						<Button type="submit" className="bg-yellow-300">
+						<Button
+							type="submit"
+							className="bg-yellow-300"
+							disabled={createNote.isPending}
+						>
+							{createNote.isPending && (
+								<Loader2 className="w-4 h-4 mr-2 animate-spin" />
+							)}
 							Create
 						</Button>
 					</div>

@@ -1,3 +1,4 @@
+import DeleteButton from '@/components/delete-button'
 import TipTapEditor from '@/components/titap-editor'
 import { Button } from '@/components/ui/button'
 import { clerk } from '@/lib/clerk-server'
@@ -51,7 +52,9 @@ const Note = async ({ params: { noteId } }: Props) => {
 					<span className="text-stone-500 font-semibold">
 						{note.name}
 					</span>
-					<div className="ml-auto">DELETE BUTTON</div>
+					<div className="ml-auto">
+						<DeleteButton noteId={note.id} />
+					</div>
 				</div>
 				<div className="h-4"></div>
 				<div className="border-stone-200 shadow-xl border-rounded-lg px-16 py-8 w-full">

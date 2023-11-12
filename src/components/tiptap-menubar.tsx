@@ -3,26 +3,54 @@ import {
 	Bold,
 	Code,
 	Codepen,
+	FlipHorizontal,
+	FlipVertical,
 	Heading1,
 	Heading2,
 	Heading3,
 	Italic,
 	List,
 	ListOrdered,
+	PanelBottom,
+	PanelLeft,
+	PanelRight,
+	PanelTop,
 	Quote,
 	Redo,
+	SeparatorHorizontal,
 	Strikethrough,
+	TableIcon,
 	Undo
 } from 'lucide-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 type Props = {
 	editor: Editor
 }
 
 const TipTapMenubar = ({ editor }: Props) => {
+	const [isEditable, setIsEditable] = useState(true)
+
+	useEffect(() => {
+		if (editor) {
+			editor.setEditable(isEditable)
+		}
+	}, [isEditable, editor])
+
 	return (
 		<div className="flex flex-wrap gap-2">
+			<button
+				onClick={() => editor.chain().focus().undo().run()}
+				disabled={!editor.can().chain().focus().undo().run()}
+			>
+				<Undo className="w-6 h-6" />
+			</button>
+			<button
+				onClick={() => editor.chain().focus().redo().run()}
+				disabled={!editor.can().chain().focus().redo().run()}
+			>
+				<Redo className="w-6 h-6" />
+			</button>
 			<button
 				onClick={() => editor.chain().focus().toggleBold().run()}
 				disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -118,6 +146,46 @@ const TipTapMenubar = ({ editor }: Props) => {
 				<ListOrdered className="w-6 h-6" />
 			</button>
 			<button
+				onClick={() =>
+					editor.isActive('table')
+						? editor.chain().focus().deleteTable().run()
+						: editor
+								.chain()
+								.focus()
+								.insertTable({
+									rows: 2,
+									cols: 2,
+									withHeaderRow: true
+								})
+								.run()
+				}
+				className={editor.isActive('table') ? 'is-active' : ''}
+			>
+				<TableIcon className="w-6 h-6" />
+			</button>
+			<button
+				onClick={() => editor.chain().focus().addColumnBefore().run()}
+			>
+				<PanelLeft className="w-6 h-6" />
+			</button>
+			<button
+				onClick={() => editor.chain().focus().addColumnAfter().run()}
+			>
+				<PanelRight className="w-6 h-6" />
+			</button>
+			<button onClick={() => editor.chain().focus().addRowBefore().run()}>
+				<PanelTop className="w-6 h-6" />
+			</button>
+			<button onClick={() => editor.chain().focus().addRowAfter().run()}>
+				<PanelBottom className="w-6 h-6" />
+			</button>
+			<button onClick={() => editor.chain().focus().deleteColumn().run()}>
+				<FlipHorizontal className="w-6 h-6" />
+			</button>
+			<button onClick={() => editor.chain().focus().deleteRow().run()}>
+				<FlipVertical className="w-6 h-6" />
+			</button>
+			<button
 				onClick={() => editor.chain().focus().toggleCodeBlock().run()}
 				disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
 				className={editor.isActive('codeBlock') ? 'is-active' : ''}
@@ -134,16 +202,12 @@ const TipTapMenubar = ({ editor }: Props) => {
 				<Quote className="w-6 h-6" />
 			</button>
 			<button
-				onClick={() => editor.chain().focus().undo().run()}
-				disabled={!editor.can().chain().focus().undo().run()}
+				onClick={() => editor.chain().focus().setHorizontalRule().run()}
+				disabled={
+					!editor.can().chain().focus().setHorizontalRule().run()
+				}
 			>
-				<Undo className="w-6 h-6" />
-			</button>
-			<button
-				onClick={() => editor.chain().focus().redo().run()}
-				disabled={!editor.can().chain().focus().redo().run()}
-			>
-				<Redo className="w-6 h-6" />
+				<SeparatorHorizontal className="w-6 h-6" />
 			</button>
 		</div>
 	)

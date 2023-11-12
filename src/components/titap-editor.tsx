@@ -8,6 +8,10 @@ import { useDebounce } from '@/lib/useDebounce'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { NoteType } from '@/lib/db/schema'
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
 
 type Props = {
 	note: NoteType
@@ -30,7 +34,17 @@ const TipTapEditor = ({ note }: Props) => {
 
 	const editor = useEditor({
 		autofocus: true,
-		extensions: [StarterKit],
+		extensions: [
+			StarterKit,
+			Table.configure({
+				resizable: true,
+				allowTableNodeSelection: true,
+				lastColumnResizable: true
+			}),
+			TableRow,
+			TableHeader,
+			TableCell
+		],
 		content: editorState,
 		onUpdate: ({ editor }) => {
 			setEditorState(editor.getHTML())

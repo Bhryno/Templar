@@ -14,7 +14,9 @@ type Props = {
 }
 
 const TipTapEditor = ({ note }: Props) => {
-	const [editorState, setEditorState] = useState(note.editorState || '')
+	const [editorState, setEditorState] = useState(
+		note.editorState || `<h1>${note.name}</h1>`
+	)
 	const saveNote = useMutation({
 		mutationFn: async () => {
 			const response = await axios.post('/api/saveNote', {
@@ -25,6 +27,7 @@ const TipTapEditor = ({ note }: Props) => {
 			return response.data
 		}
 	})
+
 	const editor = useEditor({
 		autofocus: true,
 		extensions: [StarterKit],
@@ -51,7 +54,7 @@ const TipTapEditor = ({ note }: Props) => {
 					{saveNote.isPending ? 'Saving...' : 'Saved'}
 				</Button>
 			</div>
-			<div className="prose">
+			<div className="prose porse-sm w-full mt-4">
 				<EditorContent editor={editor} />
 			</div>
 		</>

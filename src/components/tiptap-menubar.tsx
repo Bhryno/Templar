@@ -22,21 +22,12 @@ import {
 	TableIcon,
 	Undo
 } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
 
 type Props = {
 	editor: Editor
 }
 
 const TipTapMenubar = ({ editor }: Props) => {
-	const [isEditable, setIsEditable] = useState(true)
-
-	useEffect(() => {
-		if (editor) {
-			editor.setEditable(isEditable)
-		}
-	}, [isEditable, editor])
-
 	return (
 		<div className="flex flex-wrap gap-2">
 			<button

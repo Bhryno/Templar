@@ -11,6 +11,7 @@ import {
 	Italic,
 	List,
 	ListOrdered,
+	ListTodo,
 	PanelBottom,
 	PanelLeft,
 	PanelRight,
@@ -135,6 +136,12 @@ const TipTapMenubar = ({ editor }: Props) => {
 				className={editor.isActive('orderedList') ? 'is-active' : ''}
 			>
 				<ListOrdered className="w-6 h-6" />
+			</button>
+			<button
+				onClick={() => editor.chain().focus().toggleTaskList().run()}
+				className={editor.isActive('taskList') ? 'is-active' : ''}
+			>
+				<ListTodo className="w-6 h-6" />
 			</button>
 			<button
 				onClick={() =>

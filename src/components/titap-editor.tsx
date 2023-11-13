@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { EditorContent, useEditor } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
 import TipTapMenubar from './tiptap-menubar'
-import { Button } from './ui/button'
 import { useDebounce } from '@/lib/useDebounce'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
@@ -12,6 +11,8 @@ import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
+import TaskList from '@tiptap/extension-task-list'
+import TaskItem from '@tiptap/extension-task-item'
 
 type Props = {
 	note: NoteType
@@ -43,7 +44,11 @@ const TipTapEditor = ({ note }: Props) => {
 			}),
 			TableRow,
 			TableHeader,
-			TableCell
+			TableCell,
+			TaskList,
+			TaskItem.configure({
+				nested: true
+			})
 		],
 		content: editorState,
 		onUpdate: ({ editor }) => {
@@ -64,9 +69,6 @@ const TipTapEditor = ({ note }: Props) => {
 		<>
 			<div className="flex">
 				{editor && <TipTapMenubar editor={editor} />}
-				<Button disabled variant={'outline'}>
-					{saveNote.isPending ? 'Saving...' : 'Saved'}
-				</Button>
 			</div>
 			<div className="prose porse-sm w-full mt-4">
 				<EditorContent editor={editor} />

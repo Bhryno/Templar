@@ -3,8 +3,9 @@ import { Inter } from 'next/font/google'
 
 import { ClerkProvider } from '@clerk/nextjs'
 
-import './globals.css'
 import Provider from '@/components/provider'
+
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 

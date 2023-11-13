@@ -36,11 +36,11 @@ const Note = async ({ params: { noteId } }: Props) => {
 	const note = notes[0]
 
 	return (
-		<div className="min-h-screen grainy p-8">
+		<div className="min-h-screen  p-8">
 			<div className="max-w-4xl mx-auto">
 				<div className="border shadow-xl border-stone-200 rounded-lg p-4 flex items-center">
 					<Link href="/dashboard">
-						<Button className="bg-yellow-300" size="sm">
+						<Button className="bg-purple-400" size="sm">
 							Back
 						</Button>
 					</Link>

@@ -5,11 +5,11 @@ import Link from 'next/link'
 
 export default function Home() {
 	return (
-		<div className="min-h-screen grainy">
+		<div className="min-h-screen ">
 			<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
 				<h1 className="font-semibold text-7xl text-center">
 					A powerful{' '}
-					<span className="text-yellow-300 font-bold">
+					<span className="text-purple-400 font-bold">
 						note-taking
 					</span>{' '}
 					assistant.
@@ -21,7 +21,7 @@ export default function Home() {
 				<div className="mt-8"></div>
 				<div className="flex justify-center">
 					<Link href="/dashboard">
-						<Button className="bg-yellow-300">
+						<Button className="bg-purple-400">
 							Get Started
 							<ArrowRight
 								className="ml-2 w-5 h-5"

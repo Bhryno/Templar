@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export default function Home() {
 	return (
-		<div className="min-h-screen ">
+		<div className="min-h-screen select-none">
 			<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
 				<h1 className="font-semibold text-7xl text-center">
 					A powerful{' '}

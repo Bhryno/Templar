@@ -20,7 +20,7 @@ const DashboardPage = async (props: Props) => {
 
 	return (
 		<>
-			<div className={'min-h-screen bg-'}>
+			<div className="min-h-screen select-none">
 				<div className="max-w-7xl mx-auto p-10">
 					<div className="h-14"></div>
 					<div className="flex justify-between items-center md:flex-row sm:flex-col">
